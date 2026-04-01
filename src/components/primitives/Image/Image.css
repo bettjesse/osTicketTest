@@ -1,0 +1,28 @@
+/**
+ * Image Styles
+ *
+ * <figure> resets margin by default.
+ * Image is responsive (max-width: 100%) so it never overflows its container.
+ * Caption is styled subtly beneath the image.
+ */
+
+.ui-image {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ui-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.ui-image figcaption {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted, #71717a);
+  text-align: center;
+}

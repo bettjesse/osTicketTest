@@ -1,0 +1,8 @@
+/**
+ * App-level styles — minimal, just sets up the page.
+ * Component styles live in their own CSS files.
+ */
+
+main {
+  font-family: system-ui, -apple-system, sans-serif;
+}

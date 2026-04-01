@@ -1,0 +1,34 @@
+/**
+ * Text Styles
+ *
+ * Minimal reset — we don't want to over-style text since the backend
+ * controls content (headings, paragraphs, etc.) and can pass inline styles.
+ * We just ensure consistent baseline typography.
+ */
+
+.ui-text {
+  line-height: 1.6;
+  color: var(--color-text, #18181b);
+}
+
+/* Ensure child elements from HTML/markdown have sensible spacing */
+.ui-text h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ui-text h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ui-text p {
+  margin: 0;
+}
+
+.ui-text a {
+  color: var(--color-primary, #18181b);
+  text-decoration: underline;
+}
