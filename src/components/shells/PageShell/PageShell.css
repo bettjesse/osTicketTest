@@ -1,0 +1,102 @@
+/**
+ * PageShell Styles
+ *
+ * A clean, minimal shell that demonstrates the "frame" concept.
+ * The shell owns layout and chrome. The content area receives
+ * whatever the backend projects via the renderer.
+ */
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--shell-bg, #fafafa);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* ─── Header / Navigation ──────────────────────────────────────── */
+
+.page-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 3.5rem;
+  background-color: var(--shell-header-bg, #18181b);
+  color: var(--shell-header-text, #fafafa);
+}
+
+.page-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.page-shell__logo {
+  font-size: 1.25rem;
+}
+
+.page-shell__nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.page-shell__nav-link {
+  color: var(--shell-nav-text, #a1a1aa);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.page-shell__nav-link:hover {
+  color: var(--shell-header-text, #fafafa);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.page-shell__nav-link--active {
+  color: var(--shell-header-text, #fafafa);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Content Area ─────────────────────────────────────────────── */
+
+.page-shell__content {
+  flex: 1;
+  max-width: 56rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-shell__title-bar {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--shell-border, #e4e4e7);
+}
+
+.page-shell__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text, #18181b);
+}
+
+.page-shell__subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #71717a);
+  margin: 0.25rem 0 0;
+}
+
+.page-shell__body {
+  /* Content fills this area — the projection goes here */
+  min-height: 0;
+}

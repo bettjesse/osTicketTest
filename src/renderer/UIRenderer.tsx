@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import type { UIElementNode } from "./types";
 import { registry } from "./registry";
 import { ElementError } from "../components/ErrorBoundary/ElementError";
@@ -25,11 +26,11 @@ export function UIRenderer({ node }: UIRendererProps) {
     return <ElementError message="Invalid element: missing or empty node" />;
   }
 
-  // Look up the component for this type
-  const Component = registry.get(node.type);
+  // Look up the render function for this type
+  const render = registry.get(node.type);
 
   // Guard: unknown type — show error, don't crash
-  if (!Component) {
+  if (!render) {
     return (
       <ElementError
         message={`Unknown element type: "${node.type}"`}
@@ -39,5 +40,5 @@ export function UIRenderer({ node }: UIRendererProps) {
   }
 
   // Render the registered component, passing the full node
-  return <Component node={node} />;
+  return createElement(render, { node });
 }

@@ -1,5 +1,5 @@
 /**
- * Button Styles
+ * Button Styles — inspired by Shadcn/ui component spec.
  *
  * No Tailwind — vanilla CSS with custom properties for theming.
  * The variant class (--primary, --secondary) controls colors.
@@ -14,23 +14,37 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
 
-  /* Sizing & spacing */
-  padding: 0.625rem 1.25rem;
+  /* Sizing & spacing — matches Shadcn default size */
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
+  letter-spacing: -0.01em;
 
   /* Interaction */
   cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
   border: 1px solid transparent;
+
+  /* Shadcn-style subtle shadow */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .ui-button:focus-visible {
-  outline: 2px solid var(--color-focus, #3b82f6);
+  outline: 2px solid var(--color-focus, #2563eb);
   outline-offset: 2px;
+}
+
+.ui-button:active {
+  opacity: 0.9;
 }
 
 /* ─── Primary Variant ──────────────────────────────────────────── */
@@ -46,11 +60,11 @@
 
 /* ─── Secondary Variant ────────────────────────────────────────── */
 .ui-button--secondary {
-  background-color: var(--color-secondary, #f4f4f5);
+  background-color: var(--color-secondary, #ffffff);
   color: var(--color-secondary-foreground, #18181b);
   border-color: var(--color-border, #e4e4e7);
 }
 
 .ui-button--secondary:hover {
-  background-color: var(--color-secondary-hover, #e4e4e7);
+  background-color: var(--color-secondary-hover, #f4f4f5);
 }

@@ -81,7 +81,7 @@ export interface DivNode {
  * This is THE core type. Any JSON node coming from the backend
  * must be one of these types. The `type` field is the discriminator.
  *
-    * The renderer will have a registry mapping each `type` to a React component.
+ * The renderer will have a registry mapping each `type` to a React component.
  *
  * To add a new element type later:
  *   1. Define its interface (e.g. TableNode)

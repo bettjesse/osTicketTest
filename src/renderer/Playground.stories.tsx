@@ -9,11 +9,12 @@ registerDefaultElements();
 /**
  * Interactive Playground
  *
- * A live JSON editor that demonstrates the renderer's core concept:
- * change the data, the UI updates. No frontend code changes needed.
+ * A live JSON editor demonstrating osTicket 2.0's projection concept:
+ * the backend describes the interface through structured data,
+ * the frontend projects it into a visual experience.
  *
- * This mirrors osTicket 2.0's projection architecture —
- * the backend describes the interface, the frontend renders it.
+ * Edit the JSON — the renderer updates in real time.
+ * No frontend code changes needed.
  */
 
 const defaultJSON: UIElementNode = {
@@ -22,16 +23,22 @@ const defaultJSON: UIElementNode = {
   children: [
     {
       type: "text",
-      text: "# 🎨 Live Playground\n\nEdit the JSON below and watch the UI update in real time.\n\nThis is the **projection architecture** in action — the data describes the interface, the renderer projects it.",
+      text: "# Web Projection in Action\n\nThis playground demonstrates the core idea behind osTicket 2.0's **Framed Projection Architecture**:\n\n> *The frontend provides the frame. The backend projects the elements that appear inside it.*\n\nEdit the JSON on the left — the renderer projects whatever you describe. No frontend code changes needed.",
       format: "markdown",
     },
     {
       type: "image",
       image: {
         url: "https://images.unsplash.com/photo-1504297050568-910d24c426d3?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        alt: "A creative workspace",
-        caption: "Change any value in the JSON to see it reflected here",
+        alt: "Architecture building blocks",
+        caption:
+          "Elements are the fundamental building blocks of the interface",
       },
+    },
+    {
+      type: "text",
+      text: "The web interface is not the system itself — it is a **web projection** of the platform. The same structured data powering this view could project into mobile apps, integrations, or AI-driven support agents.",
+      format: "markdown",
     },
     {
       type: "div",
@@ -44,21 +51,21 @@ const defaultJSON: UIElementNode = {
         {
           type: "button",
           button: {
-            label: "Try changing me",
-            title: "Edit the label in the JSON",
+            label: "Read the Architecture Post",
+            title: "Inside osTicket 2.0",
             variant: "primary",
-            url: "#",
-            target: "",
+            url: "https://osticket.com/blog/inside-osticket-2-0-a-birds-eye-view-of-the-architecture",
+            target: "_blank",
           },
         },
         {
           type: "button",
           button: {
-            label: "Or me!",
-            title: "Edit this one too",
+            label: "View Source",
+            title: "GitHub repository",
             variant: "secondary",
-            url: "#",
-            target: "",
+            url: "https://github.com/bettjesse/osTicketTest",
+            target: "_blank",
           },
         },
       ],
@@ -85,10 +92,24 @@ function Playground() {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", minHeight: "80vh" }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "2rem",
+        minHeight: "80vh",
+      }}
+    >
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         <h3 style={{ margin: 0, fontFamily: "system-ui" }}>JSON Input</h3>
-        <p style={{ margin: 0, fontSize: "0.8125rem", color: "#71717a", fontFamily: "system-ui" }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: "0.8125rem",
+            color: "#71717a",
+            fontFamily: "system-ui",
+          }}
+        >
           Edit this JSON — the renderer updates live
         </p>
         <textarea
@@ -108,14 +129,28 @@ function Playground() {
           }}
         />
         {error && (
-          <p style={{ color: "#ef4444", fontSize: "0.75rem", margin: 0, fontFamily: "monospace" }}>
+          <p
+            style={{
+              color: "#ef4444",
+              fontSize: "0.75rem",
+              margin: 0,
+              fontFamily: "monospace",
+            }}
+          >
             Parse error: {error}
           </p>
         )}
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         <h3 style={{ margin: 0, fontFamily: "system-ui" }}>Rendered Output</h3>
-        <p style={{ margin: 0, fontSize: "0.8125rem", color: "#71717a", fontFamily: "system-ui" }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: "0.8125rem",
+            color: "#71717a",
+            fontFamily: "system-ui",
+          }}
+        >
           The frontend projects whatever the data describes
         </p>
         <div

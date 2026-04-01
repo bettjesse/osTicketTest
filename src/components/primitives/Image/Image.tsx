@@ -17,7 +17,12 @@ interface ImageProps {
 
 export function Image({ data }: ImageProps) {
   if (!data || !data.url || !data.alt) {
-    return <ElementError message="Image is missing required fields (url, alt)" type="image" />;
+    return (
+      <ElementError
+        message="Image is missing required fields (url, alt)"
+        type="image"
+      />
+    );
   }
 
   const { url, alt, caption } = data;

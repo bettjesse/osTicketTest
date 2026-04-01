@@ -42,7 +42,12 @@ function renderContent(text: string, format: TextNode["format"]): string {
 
 export function Text({ data }: TextProps) {
   if (!data || !data.text || !data.format) {
-    return <ElementError message="Text is missing required fields (text, format)" type="text" />;
+    return (
+      <ElementError
+        message="Text is missing required fields (text, format)"
+        type="text"
+      />
+    );
   }
 
   const { text, format, style } = data;

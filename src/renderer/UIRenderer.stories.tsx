@@ -164,7 +164,13 @@ export const MissingRequiredFields: Story = {
       children: [
         {
           type: "button",
-          button: { label: "", title: "", variant: "primary", url: "", target: "" },
+          button: {
+            label: "",
+            title: "",
+            variant: "primary",
+            url: "",
+            target: "",
+          },
         },
         {
           type: "image",

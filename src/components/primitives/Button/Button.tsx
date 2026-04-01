@@ -17,7 +17,12 @@ interface ButtonProps {
 
 export function Button({ data }: ButtonProps) {
   if (!data || !data.label || !data.url) {
-    return <ElementError message="Button is missing required fields (label, url)" type="button" />;
+    return (
+      <ElementError
+        message="Button is missing required fields (label, url)"
+        type="button"
+      />
+    );
   }
 
   const { label, title, variant, url, target } = data;

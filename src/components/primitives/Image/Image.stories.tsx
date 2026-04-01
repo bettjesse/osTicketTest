@@ -44,3 +44,16 @@ export const WithoutCaption: Story = {
     },
   },
 };
+
+/**
+ * Spec example — the exact image JSON from the interview spec (section 4.1).
+ */
+export const SpecExample: Story = {
+  args: {
+    data: {
+      url: "https://unsplash.com/es/fotos/estatua-de-hormigon-gris-en-campo-de-hierba-verde-durante-el-dia-Ga8VvtQYz_s",
+      alt: "Gil Scott-Heron",
+      caption: "Will not be televised",
+    },
+  },
+};

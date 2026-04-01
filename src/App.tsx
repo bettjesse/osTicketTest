@@ -1,7 +1,7 @@
 import { UIRenderer } from "./renderer/UIRenderer";
 import { registerDefaultElements } from "./renderer/registerDefaultElements";
+import { PageShell } from "./components/shells/PageShell/PageShell";
 import type { UIElementNode } from "./renderer/types";
-import "./App.css";
 
 // Register all element types once at app startup
 registerDefaultElements();
@@ -65,9 +65,9 @@ const pageData: UIElementNode = {
 
 function App() {
   return (
-    <main style={{ maxWidth: "48rem", margin: "0 auto", padding: "2rem" }}>
+    <PageShell title="The Raven" subtitle="A poem by Edgar Allan Poe">
       <UIRenderer node={pageData} />
-    </main>
+    </PageShell>
   );
 }
 
