@@ -170,23 +170,21 @@ src/
 
 ## The Thinking Journey
 
-The first thing I built was nothing visible. I started with `types.ts` — the contract between backend and frontend. In a system where the backend describes the interface, that boundary is everything. If the types are wrong, every component built on top of them is wrong too. So I spent time there first, defining a discriminated union where `node.type` determines the entire shape. TypeScript narrows it automatically — no runtime checks, no guessing.
+I started with `types.ts` the contract between backend and frontend. In a system where the backend describes the interface, that boundary is everything. If the types are wrong, every component built on top of them is wrong too. So I spent time there first, defining a discriminated union where `node.type` determines the entire shape. TypeScript narrows it automatically no runtime checks, no guessing.
 
 Then came the architectural question that shaped everything else: **how does the renderer find the right component?**
 
 A switch statement would have been faster to write. But the spec said _"your implementation should be able to support other element types later"_ — and a switch is closed by nature. Every new type means editing the renderer. In a platform like osTicket, where plugins might contribute their own UI elements, that becomes a bottleneck fast.
 
-So I chose a registry — a `Map<string, Component>`. Three lines of code that change the entire extensibility story. Define a type, build a component, register it. The renderer never changes. The **Open/Closed Principle** isn't just a textbook concept here — it's the difference between a system that scales with the team and one that doesn't.
+So I chose a registry — a `Map<string, Component>`. Three lines of code that change the entire extensibility story. Define a type, build a component, register it. The renderer never changes.
 
 The primitives came last, deliberately simple. Each one does exactly one thing: render its data into semantic HTML. They don't know about the renderer, the registry, or each other. This separation means they can be tested, documented, and replaced independently.
 
-The **Playground** was my creative addition. The spec said it wasn't required, but I wanted to build something that makes the core idea _tangible_ — a tool where you can **be the backend**, edit JSON on the left, and watch the frontend project it in real time. No code changes. Just data in, interface out. That's the whole idea behind osTicket 2.0's architecture, made interactive.
+The **Playground** was my creative addition. I wanted to build something that makes the core idea _tangible_ — a tool where you can **be the backend**, edit JSON on the left, and watch the frontend project it in real time. No code changes. Just data in, interface out. That's the whole idea behind osTicket 2.0's architecture, made interactive.
 
 ### Why the Registry Matters
 
-The registry is the architectural centerpiece. It's a simple `Map<string, Component>` — but what it enables is the difference between a UI system that works today and one that works a year from now.
-
-Without it, the renderer would need to know about every element type. Adding a new type means editing the renderer. In a codebase where multiple teams ship independently — or where plugins extend the interface — that becomes a coordination bottleneck.
+The registry is the architectural centerpiece. Without it, the renderer would need to know about every element type. Adding a new type means editing the renderer. In a codebase where multiple teams ship independently or where plugins extend the interface that becomes a coordination bottleneck.
 
 With the registry, adding a new element type is **three steps**: define the type, create the component, register it. The renderer never changes.
 
