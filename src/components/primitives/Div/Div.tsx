@@ -1,5 +1,6 @@
 import type { DivNode } from "../../../renderer/types";
 import { UIRenderer } from "../../../renderer/UIRenderer";
+import { ElementError } from "../../ErrorBoundary/ElementError";
 
 /**
  * Div — a layout container that renders child elements recursively.
@@ -17,6 +18,15 @@ interface DivProps {
 }
 
 export function Div({ data }: DivProps) {
+  if (!data || !data.style || !Array.isArray(data.children)) {
+    return (
+      <ElementError
+        message="Div is missing required fields (children, style)"
+        type="div"
+      />
+    );
+  }
+
   const { children, style } = data;
 
   return (

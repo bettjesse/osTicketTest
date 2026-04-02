@@ -5,6 +5,7 @@ import "./Button.css";
 /**
  * Button — renders as an `<a>` styled as a button.
  *
+ * Styled following the Shadcn/ui component spec (as suggested in the brief).
  * Used for navigation actions (not form submission).
  * The `variant` prop controls visual style: `"primary"` or `"secondary"`.
  * Uses `rel="noopener noreferrer"` when `target="_blank"` for security.

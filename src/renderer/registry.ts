@@ -46,4 +46,14 @@ export const registry = {
   has(type: string): boolean {
     return components.has(type);
   },
+
+  /** Remove a single registered type (useful for plugin teardown or hot-swapping) */
+  unregister(type: string): boolean {
+    return components.delete(type);
+  },
+
+  /** Clear all registrations (useful for test isolation) */
+  clear() {
+    components.clear();
+  },
 };

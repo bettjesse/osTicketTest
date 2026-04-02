@@ -128,6 +128,10 @@ The `UIRenderer` and `registry` are never modified. This follows the **Open/Clos
 
 The `UIElementNode` type is an explicit union of all known element types. This provides full TypeScript safety (autocomplete, type narrowing, compile-time checks) but requires updating the union when adding new types. In a large-scale system with plugin-based extensions, a hybrid approach typed union for core elements plus a generic fallback for dynamically registered types — would be more appropriate. For this exercise, explicit safety was the better choice.
 
+### Button Styling — Shadcn/ui Spec
+
+As suggested in the brief, the Button component follows the [Shadcn/ui](https://ui.shadcn.com/) component spec: sizing, border-radius, shadow, focus ring, and variant pattern all mirror Shadcn's default button. Implemented in vanilla CSS with custom properties (no Tailwind), making it easy to theme or override for white-labeling — which osTicket would need for enterprise customers.
+
 ### Inline Styles from JSON
 
 The backend controls layout via `React.CSSProperties` objects (flexbox, grid, gap, etc.). This is flexible but not validated — invalid CSS properties are silently ignored by the browser. A production system might validate the style object or restrict it to an allowable subset.
@@ -152,12 +156,16 @@ src/
 │   ├── registerDefaultElements.tsx    # Connects primitives to registry
 │   ├── UIRenderer.tsx                 # Core renderer (~15 lines of logic)
 │   ├── UIRenderer.stories.tsx         # Full page render + error handling stories
-│   └── Playground.stories.tsx         # Interactive JSON playground
+│   ├── CreativeExample.stories.tsx    # Realistic support ticket view
+│   ├── Playground.stories.tsx         # Interactive JSON playground
+│   └── examples/                      # Example JSON payloads (simulated backend data)
+│       ├── ravenPage.ts               # The spec's full page render
+│       └── supportTicket.ts           # Creative example — support ticket view
 ├── components/
 │   ├── shells/
 │   │   └── PageShell/                 # Page-level frame (header, nav, content area)
 │   ├── primitives/
-│   │   ├── Button/                    # Navigation button (<a> styled as button)
+│   │   ├── Button/                    # Navigation button (<a> styled per Shadcn/ui spec)
 │   │   ├── Text/                      # HTML / Markdown / plain text renderer
 │   │   ├── Image/                     # Image with optional caption (<figure>)
 │   │   └── Div/                       # Recursive layout container
@@ -181,6 +189,8 @@ So I chose a registry — a `Map<string, Component>`. Three lines of code that c
 The primitives came last, deliberately simple. Each one does exactly one thing: render its data into semantic HTML. They don't know about the renderer, the registry, or each other. This separation means they can be tested, documented, and replaced independently.
 
 The **Playground** was my creative addition. I wanted to build something that makes the core idea _tangible_ — a tool where you can **be the backend**, edit JSON on the left, and watch the frontend project it in real time. No code changes. Just data in, interface out. That's the whole idea behind osTicket 2.0's architecture, made interactive.
+
+The **Support Ticket** example takes a different angle — it shows how the same four primitives compose into a realistic osTicket page (ticket header, customer message, agent response, action buttons) purely through structured data. No new components were needed. The JSON lives in `examples/supportTicket.ts`, separate from the rendering, demonstrating the data/UI separation in practice.
 
 ### Why the Registry Matters
 

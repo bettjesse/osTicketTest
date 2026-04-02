@@ -3,6 +3,7 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { describe, it, expect, afterEach } from "vitest";
 import { UIRenderer } from "./UIRenderer";
 import { registerDefaultElements } from "./registerDefaultElements";
+import { registry } from "./registry";
 import type { UIElementNode } from "./types";
 
 // Register all element types before tests run
@@ -94,5 +95,46 @@ describe("UIRenderer", () => {
 
     // Invalid node shows error, doesn't crash
     expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  // ─── Div Validation ────────────────────────────────────────────
+
+  it("shows an error when a div is missing children", () => {
+    const node = {
+      type: "div",
+      style: { display: "flex" },
+    } as unknown as UIElementNode;
+
+    render(<UIRenderer node={node} />);
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    expect(screen.getByText(/missing required fields/i)).toBeInTheDocument();
+  });
+
+  it("shows an error when a div is missing style", () => {
+    const node = {
+      type: "div",
+      children: [{ type: "text", text: "Hello", format: "plainText" }],
+    } as unknown as UIElementNode;
+
+    render(<UIRenderer node={node} />);
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+  });
+
+  // ─── Registry ──────────────────────────────────────────────────
+
+  it("supports unregistering element types", () => {
+    // Register a custom type
+    registry.register("custom", ({ node }) => (
+      <span data-testid="custom">{node.type}</span>
+    ));
+
+    expect(registry.has("custom")).toBe(true);
+    registry.unregister("custom");
+    expect(registry.has("custom")).toBe(false);
+
+    // Rendering an unregistered type shows an error
+    const node = { type: "custom" } as unknown as UIElementNode;
+    render(<UIRenderer node={node} />);
+    expect(screen.getByRole("alert")).toBeInTheDocument();
   });
 });
